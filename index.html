@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        width: 400px;
+        height: 300px;
+        background-color: tan;
+      }
+      .card {
+        padding: 10px;
+        margin: 5px;
+        background-color: tan;
+        display: inline-block;
+      }
+
+      #check {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+
+    <button id="check">Check</button>
+    <script>
+      let phrases = ["cat and dog", "he is a good friend", "nice to meet you"];
+      let sent = phrases[getRandomInt(phrases.length)];
+      let arr = sent.split(" ");
+      console.log(arr);
+      for (let i = 0; i < arr.length; i++) {
+        document.write(`<div draggable="true" ondragstart="drag(event)" class="card">
+       ${arr[i]}
+      </div>`);
+      }
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      function allowDrop(event) {
+        event.preventDefault();
+      }
+
+      function drag(event) {
+        let sourse = event.target;
+        event.dataTransfer.setData("text", sourse.innerText);
+      }
+
+      function drop(event) {
+        event.preventDefault();
+        let data = event.dataTransfer.getData("text");
+        //  event.target.appendChild(document.getElementById(data));
+        let drop = event.target;
+        drop.innerText += data;
+      }
+
+      let checkButton = document.getElementById("check");
+      checkButton.addEventListener("click", check);
+
+      function check(event) {
+        let div1 = document.getElementById("div1");
+        let str = div1.innerText;
+        let str1 = arr.join("").split(",").join("");
+        if (str1 == str) {
+          alert("Correct");
+        } else {
+          alert("Incorrect");
+        }
+      }
+    </script>
+  </body>
+</html>
