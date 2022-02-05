@@ -56,7 +56,7 @@
         let data = event.dataTransfer.getData("text");
         //  event.target.appendChild(document.getElementById(data));
         let drop = event.target;
-        drop.innerText += data;
+        drop.innerText += " " + data;
       }
 
       let checkButton = document.getElementById("check");
@@ -64,7 +64,8 @@
 
       function check(event) {
         let div1 = document.getElementById("div1");
-        let str = div1.innerText;
+        let str = div1.innerText.split(" ").join("");
+        console.log(str);
         let str1 = arr.join("").split(",").join("");
         if (str1 == str) {
           alert("Correct");
